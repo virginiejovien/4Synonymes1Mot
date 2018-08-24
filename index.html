@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 synonymes 1 mot</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="public/js/gameMgr.js"></script>
+    <link rel="stylesheet" href="public/css/index.css">    
+  </head>
+  <body>
+     <div id="page">
+    <h1>Bienvenue sur 4 synonymes pour 1 mot !!!</h1> 
+    <div id="connect"> 
+        <h2>Avant de jouer</h2>   
+        <form id="form-pseudo">
+            <p>Donne ton pseudonyme : <input id="username" type="text" maxlength='12' size='12' placeholder='12 carractères maxi'/></p>
+            <p><input class="bouton" type="submit" value="Envoyer"></p>
+        </form>
+    </div>
+    <div>
+    <div id="jeu">
+            <h2>Trouvez le mot correspondant à 1 de ces 4 synonymes</h2> 
+            <h3 id="synonyme"></h3>
+            <div id="liste-mot">               
+               <p class="mots" id="mot-un">En attente du maître de jeu...</p>
+               <p class="mots" id="mot-deux">En attente du maître de jeu...</p>
+               <p class="mots" id="mot-trois">En attente du maître de jeu...</p>
+               <p class="mots" id="mot-quatre">En attente du maître de jeu...</p>
+            </div>    
+            <form id="post-reponse">              
+                <p id="saisie-reponse">Réponse : <input id="reponse" type="text" placeholder="" onchange="this.value=this.value.toLowerCase();" value=""/><input class="bouton" type="submit" value="Envoyer"></p>  
+                <p id="indice">Le mot commence par:</p>
+                <p id="lettre"></p>                
+            </form>
+    </div> 
+    <div id="attente">
+        <h2>Tenez vous prêt à jouer</h2> 
+            <p><input id="ready" type="submit" value="READY"></p>  
+    </div> 
+    <div id="bravo"></div>
+    <div id="tableau-joueur">
+        <div id="joueurs"> 
+            <h2>Joueurs en ligne</h2> 
+            <div id="pseudo">
+                <p id="joueur0"><strong id="score0"></p> 
+                <p id="joueur1"><strong id="score1"></p> 
+                <p id="joueur2"><strong id="score2"></p> 
+                <p id="joueur3"><strong id="score3"></p> 
+                <p id="joueur4"><strong id="score4"></p>           
+            </div>
+        </div>
+        <div id="score"> 
+            <h2>Scores</h2>  
+            <div id="recap-score">               
+            </div>        
+        </div>
+   </div>
+</div> 
+  </body>
+</html>

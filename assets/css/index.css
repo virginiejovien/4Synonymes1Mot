@@ -1,0 +1,198 @@
+/* ****************************************************************************
+***** FEUILLE DE STYLE INDEX.CSS JEU MULTI-JOUEUR           *******************
+*******************************************************************************/
+*{
+	margin: 0; 
+	padding: 0;
+} 
+
+/* Image de fond d'écran identique sur tout le site*/ 
+body{
+    margin: 10; 
+    padding: 10;
+    background-color: #024A73;  
+    font-family: "Comic Sans MS", Arial, Helvetica;
+}
+#page{ 
+    width: 90%;
+    background-color: #6a96a7;
+    width: 90%;
+    height:900px;
+    margin: 0 auto;
+    padding: 10px 0 50px;
+}
+h1{
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+    color: #015F65; text-decoration: none;
+    background-color: #95a3f3;
+}
+
+h2{
+    position: relative;
+	text-align: center;
+    font-size: 1.2em;    
+    color: #015F65; text-decoration: none;
+    background-color:  #6a96a7;
+    
+}
+#connect{
+    width: 500px;
+    margin: auto;
+    border: 3px solid #024A73;   
+    border-radius: 5px;
+    margin-top: 120px;
+    position: relative;
+    background-color:#95a3f3;
+    margin-bottom: 100px;
+}
+
+#form-pseudo{
+    margin-right: 26px;
+    margin-left: 26px;
+    margin-bottom: 5px;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+    }
+
+#attente{
+    width: 1000px;
+    margin: auto;
+    border: 3px solid #024A73;
+    border-radius: 5px;
+    margin-top:40px;
+    margin-bottom: 30px;
+    position: relative;
+    display:none;
+    background-color: #95a3f3;
+    }
+
+#attente p{
+    height: 60px;
+
+}
+#ready{
+    margin: auto;
+    border: 1px solid #024A73;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #024A73;
+    color:  #92e5ea;  
+    font-size: 1.2em;  
+    width: 90px; 
+    height: 40px;
+    display: flex;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#jeu{
+    width: 1000px;
+    margin: auto;
+    border: 3px solid #024A73;
+    border-radius: 5px;
+    margin-top:40px;
+    margin-bottom: 30px;
+    position: relative;
+    display: none;
+    background-color: #95a3f3;
+}
+
+#liste-mot{
+    margin:10px;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+  
+}
+
+.mots{
+    width: 100%;
+    margin: auto;
+    border: 1px solid #024A73;
+    border-radius: 5px;
+    margin:10px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #024A73;
+    color:  #92e5ea;
+}
+
+#lettre{
+    border: 1px solid #024A73;
+    border-radius: 5px;
+    text-align: left;
+    text-transform: uppercase;
+    background-color: #024A73;
+    color:  #92e5ea;
+    margin-left: -200px;
+}
+
+#indice{
+    margin-left: -70px;
+    display:none;
+}
+
+.bouton{
+    margin-left: 10px;
+}
+
+#post-reponse{   
+    margin:10px;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+}
+#saisie-reponse{  
+   
+    display: none;
+} 
+
+#bravo{  
+    width: 1000px;   
+    margin: auto;
+    display: block; 
+    position: relative;
+    justify-content: space-around;    
+}
+
+#tableau-joueur{  
+    width: 1000px;   
+    margin: auto;
+    display: block; 
+    position: relative;
+    justify-content: space-around;    
+}
+
+#score{
+    width: 480px;     
+    border: 3px solid #024A73;
+    border-radius: 5px;
+    background-color: #95a3f3;
+    margin-left: 517px;
+}
+
+#recap-score{
+    width: 480px;     
+    height: 500px;
+    overflow:auto;
+    display: none;
+    font-size: 1em;  
+}
+#joueurs{
+    width: 500px;
+    float: left;
+    border: 3px solid #024A73;
+    border-radius: 5px;
+    background-color: #95a3f3;
+   
+}
+#pseudo p {
+    display: flex;
+}

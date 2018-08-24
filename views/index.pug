@@ -1,0 +1,55 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title 4 synonymes 1 mot
+  script(src='/socket.io/socket.io.js')
+  script(src='static/js/gameMgr.js')
+  link(rel='stylesheet' href='static/css/index.css')
+
+#page
+  h1 Bienvenue sur 4 synonymes pour 1 mot !!!
+  #connect
+    h2 Avant de jouer
+    form#form-pseudo
+      p
+        | Donne ton pseudonyme : 
+        input#username(type='text' maxlength='12' size='12' placeholder='12 carractères maxi')
+      p
+        input.bouton(type='submit' value='Envoyer')
+  div
+    #jeu
+      h2 Trouvez le mot correspondant &agrave; 1 de ces 4 synonymes
+      h3#synonyme
+      #liste-mot
+        p#mot-un.mots En attente du maître de jeu...
+        p#mot-deux.mots En attente du maître de jeu...
+        p#mot-trois.mots En attente du maître de jeu...
+        p#mot-quatre.mots En attente du maître de jeu...
+      form#post-reponse
+        p#saisie-reponse
+          | R&eacute;ponse : 
+          input#reponse(type='text' placeholder='' value='' onchange='this.value=this.value.toLowerCase();')
+          input.bouton(type='submit' value='Envoyer')
+        p#indice Le mot commence par:
+        p#lettre
+    #attente
+      h2 Tenez vous pr&ecirc;t &agrave; jouer
+      p
+        input#ready(type='submit' value='READY')
+    #bravo    
+    #tableau-joueur
+      #joueurs
+        h2 Joueurs en ligne
+        #pseudo
+          p#joueur0
+          p#joueur1          
+          p#joueur2          
+          p#joueur3          
+          p1#joueur4          
+      #score
+        h2 Scores
+        #recap-score
+        
+
+

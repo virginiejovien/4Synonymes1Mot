@@ -5,7 +5,6 @@ Projet Back-End : Jeu multi-joueurs : 4 Synonymes pour 1 Mot
 1) Procédure d'installation avant le lancement du jeu
 
 Pour récupérer un clone du projet "4Synonymes1Mot":
-$ mkdir 4Synonymes1Mot  //  Vous devez créer un répertoire " ~/4Synonymes1Mot"  
 $ git clone https:/github.com/virginiejovien/4Synonymes1Mot
 
 Ci-dessous les installations globales à faire : 
@@ -50,7 +49,7 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
         2: puis se placer sur la base de données jeu : use jeu
         3: mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
         (3' si pb dans l'importation du fichier JSON) copier le contenu du fichier : bdd_jeu_questions.js qui se trouve  dans le repertoire data :  ~/4Synonymes1Mot/data/bdd_jeu_questions.js (tous les insert de la collection question)
-        Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insert({.............});
+        Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
 
         La base de données jeu a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
 

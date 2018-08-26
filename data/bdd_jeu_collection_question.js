@@ -424,7 +424,7 @@ db.question.insertMany(
   mot2 : "stylo",
   mot3 : "pastel",
   mot4 : "portemine",
-  synonyme: "four"
+  synonyme: "crayon"
 },{
   mot1 : "museau",
   mot2 : "flair",
@@ -556,7 +556,7 @@ db.question.insertMany(
   mot2 : "bouquin",
   mot3 : "lièvre",
   mot4 : "hase",
-  synonyme: "mémoire"
+  synonyme: "lapin"
 },{ 
   mot1 : "délice",
   mot2 : "joie",

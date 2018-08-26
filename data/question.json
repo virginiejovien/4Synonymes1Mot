@@ -68,7 +68,7 @@
 { "mot1" : "fournil", "mot2" : "insuccès", "mot3" : "chaufour", "mot4" : "échec", "synonyme" : "four" }
 { "mot1" : "aéroplane", "mot2" : "canadair", "mot3" : "charter", "mot4" : "zinc", "synonyme" : "avion" }
 { "mot1" : "grêle", "mot2" : "svelte", "mot3" : "menu", "mot4" : "fluet", "synonyme" : "mince" }
-{ "mot1" : "fusain", "mot2" : "stylo", "mot3" : "pastel", "mot4" : "portemine", "synonyme" : "four" }
+{ "mot1" : "fusain", "mot2" : "stylo", "mot3" : "pastel", "mot4" : "portemine", "synonyme" : "crayon" }
 { "mot1" : "museau", "mot2" : "flair", "mot3" : "pif", "mot4" : "narine", "synonyme" : "nez" }
 { "mot1" : "panard", "mot2" : "patte", "mot3" : "jambe", "mot4" : "nougat", "synonyme" : "pied" }
 { "mot1" : "pareil", "mot2" : "semblable", "mot3" : "confrère", "mot4" : "équivalent", "synonyme" : "égal" }
@@ -90,7 +90,7 @@
 { "mot1" : "cou", "mot2" : "rabat", "mot3" : "gorge", "mot4" : "encolure", "synonyme" : "col" }
 { "mot1" : "azuré", "mot2" : "beigne", "mot3" : "coquard", "mot4" : "débutant", "synonyme" : "bleu" }
 { "mot1" : "hutte", "mot2" : "cabane", "mot3" : "cellule", "mot4" : "box", "synonyme" : "case" }
-{ "mot1" : "gibier", "mot2" : "bouquin", "mot3" : "lièvre", "mot4" : "hase", "synonyme" : "mémoire" }
+{ "mot1" : "gibier", "mot2" : "bouquin", "mot3" : "lièvre", "mot4" : "hase", "synonyme" : "lapin" }
 { "mot1" : "délice", "mot2" : "joie", "mot3" : "régal", "mot4" : "bonheur", "synonyme" : "plaisir" }
 { "mot1" : "square", "mot2" : "parc", "mot3" : "verger", "mot4" : "enclos", "synonyme" : "jardin" }
 { "mot1" : "mandoline", "mot2" : "luth", "mot3" : "lyre", "mot4" : "basse", "synonyme" : "guitare" }

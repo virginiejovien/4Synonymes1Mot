@@ -11,7 +11,7 @@ Ci-dessous les installations globales à faire :
    - "npm"
    - "nodejs" 
    - "expressjs"
-   - "mongodb"
+   - "mongodb" (installer mongoDB depuis cette adresse: https://www.mongoDB.org/downloads)
 
 Ci-dessous les installations locales à faire : 
    - $ cd ~/4Synonymes1Mot"
@@ -36,22 +36,30 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
    |    |- js         // Stockage des scripts Javascripts ".js"
    |       
    |-- views          // Stockage des templates "Pug"
+   |-- .gitignore
+   |-- db.js
+   |-- DIW JS - Atelier back.pdf
    |-- index.html   
    |-- lancer-mongo.bat
    |-- package-lock.json
    |-- package.json 
+   |-- README.md
    |-- serveur-jeu.js // serveur  du jeu 
    
 
-2) Procédure de lancement du jeu
+2) Procédure de lancement du jeu 
   - lancer la BBD:
-        1: lancer mongodb en executant: lancer-mongo.bat (à placer sur le bureau et à exécuter)
-        2: puis se placer sur la base de données jeu : use jeu
-        3: mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
-        (3' si pb dans l'importation du fichier JSON) copier le contenu du fichier : bdd_jeu_questions.js qui se trouve  dans le repertoire data :  ~/4Synonymes1Mot/data/bdd_jeu_questions.js (tous les insert de la collection question)
-        Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
+        1: Lancer mongodb en executant: lancer-mongo.bat (adaptez les chemins qui correspondent à votre         configuration et placer le fichier sur le bureau et exécuter le)
+        2: Créer la DataBase jeu : 
+            use jeu
+        3: Importer le fichier question.json  etc reation de la collection  "question"
+            mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
+        3': Ou autre possibilité: on crée la collection question 
+            db.createCollection("question");
+            copier le contenu du fichier : bdd_jeu_questions.js qui se trouve  dans le repertoire data :  ~/4Synonymes1Mot/data/bdd_jeu_questions.js (tous les insert de la collection question)
+            Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
 
-        La base de données jeu a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
+        La base de données jeu a été créée et a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
 
   - lancer le serveur: serveur-jeu.js
        - $ cd ~/4Synonymes1Mot"

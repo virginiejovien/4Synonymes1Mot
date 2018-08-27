@@ -12,7 +12,7 @@ Ci-dessous les installations globales à faire :
    - "npm"
    - "nodejs" 
    - "expressjs"
-   - "mongoDB"
+   - "mongodb"
 
 Ci-dessous les installations locales à faire : 
    - $ cd ~/4Synonymes1Mot"

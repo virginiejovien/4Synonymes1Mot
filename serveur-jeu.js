@@ -44,6 +44,7 @@ verifDBConnect();
 //  Préparation du fond d'écran, et récupération des scores des joueurs 
 //  Requete des infos des scores des joueurs dans la collection "joueur" de la BDD JEU
 //*************************************************************************************************
+
 app.set('view engine', 'pug');
 app.use('/static', express.static(__dirname + '/assets'));
 app.get('/', function(req, res, next) {    
@@ -351,31 +352,27 @@ socketIo.on('connection', function(websocketConnection) {
                         if (error) {
                             console.log('Erreur de collection',error);
                             return false;
-                        } else {                                   
-                            
-                            } if (documents == false) {
-                                // if (documents == false) {                          // Nouveau joueur, inexistant dans la base --> Ok, On l accepte
+                        } else {                                
+                            if (documents == false) {
+                                // Nouveau joueur, inexistant dans la base --> Ok, On l accepte
                                 joueurs.compteur++;                                   // Nbre de joueurs actuels autorisés et dernier joueur connecté  (Water Mark)
                                 currentPlayer = joueurs.compteur;                     // Joueur courant de cette session-Connexion
                                 prepareAndInsertNewPlayer(objetJoueur, colJoueur);    // Ecriture dans la BDD du nouveau joueur
                                 socketIo.emit('pret', objetJoueur);
                                 getScores(socketIo); // affichage du tableau des scores des joueurs qui ont déjà joué ou qui sont entrain de jouer et de leurs avatars pseudo scores et performances, durée de jeu
-                               
-                                websocketConnection.emit('EffaceFormulaire');
-        
-                                if (objetJoueur.joueur == 0) {             // Si c'est le 1er joueur connecté, il est le Maître de la partie
-                                    getSeriesOfQuestions(socketIo);     // On va chercher les questions dans la BDD
-                                };
-        
-                                if (joueurs.compteur > 0) {   // Si le joueur qui vient d'être accepté N'EST PAS le 1er, MAJ sur tous les joueurs de ses infos
-                                    for (var i=0; i<=joueurs.compteur-1;i++) {
-                                        websocketConnection.emit('listeJoueur', joueurs['joueur'+i]);
-                                    }
-                                   
-                                }                          
-                            } else {
-                
+                                
+                                websocketConnection.emit('EffaceFormulaire');        
+                                    if (objetJoueur.joueur == 0) {             // Si c'est le 1er joueur connecté, il est le Maître de la partie
+                                        getSeriesOfQuestions(socketIo);     // On va chercher les questions dans la BDD
+                                    };            
+                                    if (joueurs.compteur > 0) {   // Si le joueur qui vient d'être accepté N'EST PAS le 1er, MAJ sur tous les joueurs de ses infos
+                                        for (var i=0; i<=joueurs.compteur-1;i++) {
+                                            websocketConnection.emit('listeJoueur', joueurs['joueur'+i]);
+                                        }                                        
+                                    }                          
+                            } else {                
                                 sendAlreadyExistentPseudoMsg(websocketConnection, objetJoueur)
+                            }
                         }
                     });                          
                 }   // Le nom du joueur est vide gerer dans la fonction checkFilledPlayerNameIsOk     
@@ -411,7 +408,7 @@ socketIo.on('connection', function(websocketConnection) {
                     });
                 }
             });
-            
+
         } else {
             let lettresReponse = objetQuestions.synonyme;  //on n'a pas de gagnant on envoie un indice pour aider les joueurs à trouver le mot
             socketIo.emit('lettre', lettresReponse);     // on envoie l'indice au front pour aider les joueurs à trouver le mot
@@ -425,10 +422,14 @@ socketIo.on('connection', function(websocketConnection) {
         if(currentPlayer >= 0){     // Joueur courant de cette session-Connexion
             let colJoueur = client.db('jeu').collection('joueur');
             updateDureePlayer(currentPlayer,colJoueur);    // renseignement dans la BDD de la durée de temps passé à jouer du joueur qui se déconnecte 
-            joueurs['joueur'+currentPlayer].idConnect = '';
+            joueurs['joueur'+currentPlayer].idConnect = '';  //on réinitialise les données du joueur qui part dans l'objet joueur 
             joueurs['joueur'+currentPlayer].score = 0;
+            joueurs['joueur'+currentPlayer].dateDebut = 0;
+            joueurs['joueur'+currentPlayer].dateFin = 0;
+            joueurs['joueur'+currentPlayer].rapidite = 0;
+            joueurs['joueur'+currentPlayer].dernierTemps = 0;
             joueurs['joueur'+currentPlayer].username = '';
-            joueurs['joueur'+currentPlayer].ready = false;   
+            joueurs['joueur'+currentPlayer].ready = false;
             joueurs.compteur = joueurs.compteur -1; 
             joueurs.parti= true; // un joueur a quitté la partie on n'autorisera plus de nouveaux joueurs 
             if (joueurs.compteur == -1) { //il n'y a plus de joueurs connectés qui jouent on autorise une nouvelle partie avec des nouveaux joueurs

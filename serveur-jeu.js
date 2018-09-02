@@ -175,7 +175,7 @@ let controleNbreMaxiPlayersIsOK = function(pWebsocketConnection,pObjetJoueur) {
         return false;
     } else {
         return true;
-    };
+    }
 };  
 
 //*************************************************************************************************************************************
@@ -193,7 +193,7 @@ let controlePartiPlayersIsOK = function(pWebsocketConnection,pObjetJoueur) {
         return false;
     } else {
         return true;
-    };
+    }
 };  
 
 //************************************************************************************************

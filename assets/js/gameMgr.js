@@ -9,7 +9,6 @@ window.addEventListener('DOMContentLoaded', function() {
 //************************************************************************************************
 // Déclaration des variables globales
 //************************************************************************************************   
-
     var websocketConnection = io('http://localhost:8000');
     var formPseudo = window.document.getElementById('form-pseudo');
     var blockPseudo = window.document.getElementById('connect');
@@ -40,12 +39,9 @@ window.addEventListener('DOMContentLoaded', function() {
 //************************************************************** 
 // Affichage des infos des joueurs : avatar, pseudo et score
 //**************************************************************
-
     var affichageInfoJoueur = function(pjoueur){
-        console.log("pjoueur AFICHAGE INFOJOUEUR", pjoueur);
         var avatarImage = ' <img margin ="auto" src="' +pjoueur.avatar+'"alt="avatar" title="avatar">';  
         var affJoueur = avatarImage + '  ' + pjoueur.username + '   Score: ' +pjoueur.score + '   Rapidité: ' +pjoueur.dernierTemps + ' s'; 
-        console.log("affJoueur",'joueur'+affJoueur);   
         switch(pjoueur.joueur) {
             case 0:                                           
             joueur0.innerHTML  =  affJoueur;   
@@ -69,11 +65,8 @@ window.addEventListener('DOMContentLoaded', function() {
 //*************************************************************************************** 
 // Affichage des infos et des scores des des joueurs : avatar, pseudo et score, durée
 //***************************************************************************************
-
     var affichageScoresJoueur = function(pjoueur){
         var infoJoueurs = pjoueur;
-        console.log('liste des scores', infoJoueurs);
-        console.log("infoJoueurs.avatar",infoJoueurs.avatar);
         blockScore.style.display = 'block'; 
         blockScore.innerHTML = '';
         for (var i=0; i < infoJoueurs.length; i++) {
@@ -89,15 +82,13 @@ window.addEventListener('DOMContentLoaded', function() {
             var avatarImage  = ' <img margin ="auto" src="' + infoJoueurs[i].avatar+'"alt="avatar" title="avatar">';           
             var aff= avatarImage + '  ' + infoJoueurs[i].username + '   Score: ' + '  ' + infoJoueurs[i].score + '  ' +  duree  + '  ' + rapidite; 
             blockScore.innerHTML += aff + "<BR>";
-            console.log("infoJoueurs[i].avatar",infoJoueurs[i].avatar);
-            console.log('aff',aff);
         }
     }; 
+
 //********************************************************************** 
 // Déconnection joueur : on retire du Dom les infos du joueur deconnecté
 //**********************************************************************  
     var deconnectJoueur = function(pJoueurDeconnect) {
-        console.log('pJoueurDeconnecté', pJoueurDeconnect);
         switch(pJoueurDeconnect) {
             case 0:                                           
             joueur0.innerHTML  =  '';        
@@ -115,20 +106,16 @@ window.addEventListener('DOMContentLoaded', function() {
             joueur4.innerHTML  =  '';        
             break;
         };     
-    }
+    };
 
-
-//********************************************************************** 
-// convertisseur millisecondes
-//**********************************************************************  
+//******************************************************************************** 
+// convertisseur millisecondes pour afficher le temps passé à jouer au bon format
+//********************************************************************************  
     var getTemps = function timeConversion(millisec) {
 
         var seconds = (millisec / 1000).toFixed(1);
-
         var minutes = (millisec / (1000 * 60)).toFixed(1);
-
         var hours = (millisec / (1000 * 60 * 60)).toFixed(1);
-
         var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
 
         if (seconds < 60) {
@@ -141,6 +128,7 @@ window.addEventListener('DOMContentLoaded', function() {
             return days + " Jours"
         }
     };
+
 //************************************************************************************************
 // Verification que la connexion est établie avec le serveur sur le port:8000
 //************************************************************************************************
@@ -153,8 +141,7 @@ window.addEventListener('DOMContentLoaded', function() {
 //************************************************************************************************ 
     formPseudo.addEventListener('submit', function (event) { 
         event.preventDefault();                
-        objetDuJoueur.username = elementUsername.value;     
-        console.log('objetDuJoueur ce que le client envoi',objetDuJoueur);                    
+        objetDuJoueur.username = elementUsername.value;                        
         websocketConnection.emit('controle', objetDuJoueur);
     });
 
@@ -162,7 +149,6 @@ window.addEventListener('DOMContentLoaded', function() {
 // message au connecté qu'il ne peut pas jouer car nb de joueurs Maxi atteint (5)
 //*******************************************************************************
     websocketConnection.on('nbJoueurMax', function(message) { 
-        console.log('message reçu nombre de joueurs maxi atteint',message);
         var messageConnexionMaxi = message;  
         alert(messageConnexionMaxi.message);
         blockPseudo.style.display = 'block'; 
@@ -175,14 +161,14 @@ window.addEventListener('DOMContentLoaded', function() {
 // message au connecté qu'il ne peut pas jouer car nb de joueurs Maxi atteint (5)
 //*******************************************************************************
     websocketConnection.on('enCours', function(message) { 
-        console.log('message reçu partie encours',message);
         var messagePartiEncours = message;  
         alert(messagePartiEncours.message);
         blockPseudo.style.display = 'block'; 
         blockJeu.style.display = 'none'; 
         blockJoueur.style.display = 'none'; 
         blockReady.styledisplay = 'none';        
-    });    
+    });  
+
 //**************************************************************************************************
 // LE CONNECTE EST UN JOUEUR A PRESENT
 //**************************************************************************************************  
@@ -199,7 +185,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
         if (objetDuJoueur.username == joueur.username) {
             objetDuJoueur = joueur;
-            console.log('objetDuJoueur dans son environnement client',objetDuJoueur);
         }
     });
 
@@ -209,35 +194,30 @@ window.addEventListener('DOMContentLoaded', function() {
     });
    
 // Le client reçoit la liste des autres joueurs inscrits et aptes à jouer
-   websocketConnection.on('listeJoueur', function(joueur) {
-       console.log('listeJoueur',joueur);
+    websocketConnection.on('listeJoueur', function(joueur) {
         affichageInfoJoueur(joueur); // affichage des données joueurs (Avatar, pseudo, score, dernierTemps, )
     });
 
 // Le client reçoit le Tableau des scores
     websocketConnection.on('scores', function(joueur) {
-        console.log('liste des scores des JOUEURS',joueur);
-        affichageScoresJoueur(joueur); // affichage des données joueurs (Avatar, pseudo, score)
+       affichageScoresJoueur(joueur); // affichage des données joueurs (Avatar, pseudo, score)
     });
 
-//le joueur est prêt à jouer "début du chronomètre" au click Ready
-    ready.addEventListener('click', function (event) { 
-        console.log('ready');                          //pour calcul du temps de jeu 
+//le joueur est prêt à jouer "début du chronomètre" au click Ready:   pour calcul du temps de jeu
+    ready.addEventListener('click', function (event) {                         
         blockReady.style.display = 'none'; 
         websocketConnection.emit('ready',objetDuJoueur);           
     });
 
 //le joueur va jouer
-    websocketConnection.on('peutJouer', function(objetJoueur) { 
-        console.log('peut jouer objetDuJoueur',objetDuJoueur); 
+    websocketConnection.on('peutJouer', function(objetJoueur) {       
         objetDuJoueur.ready = true;
         blockReady.style.display = 'none';
         blockJeu.style.display = 'block';  //si joueur maitre questions visibles sinon attend la fin de la partie encours
     });
           
 // Gestion et alert des messages liés à la connection
-    websocketConnection.on('message', function(message) {
-        console.log('message reçu pb saisie pseudo',message);
+    websocketConnection.on('message', function(message) {        
         var messageConnexion = message;
         elementUsername.value = '';  
         alert(messageConnexion.message);
@@ -274,15 +254,13 @@ window.addEventListener('DOMContentLoaded', function() {
         var objetReponse = {
             reponse: elementReponse.value,
         };
-        objetReponse.joueur = objetDuJoueur.joueur;
-        console.log('objetReponse',objetReponse);
+        objetReponse.joueur = objetDuJoueur.joueur;       
         elementReponse.value = '';
         websocketConnection.emit('reponse', objetReponse); // on envoit au serveur la réponse saisie par le joueur
     });
 
 //on récupère deux indices : 2 lettres qu'on affiche
     websocketConnection.on('lettre', function(lettre) { 
-        console.log('lettreReponse',lettre);
         var mot = lettre;
         indice.innerHTML = "Le mot commence par:";
         indice.style.display = 'block'; 
@@ -292,7 +270,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 //on récupère le gagnant mise à jour du score 
     websocketConnection.on('gagne', function(joueur) { 
-        console.log('recoit apres traitement gagne',joueur);
         //mise à jour de l'affichage des scores
         var avatarImage =  affichageInfoJoueur(joueur);
         blockBravo.innerHTML = avatarImage + '  BRAVO !!!!';    // affichage de l'avatar du gagnant qu'on félicite
@@ -301,14 +278,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // Le client reçoit le Tableau des scores mise à jour
     websocketConnection.on('scores', function(joueur) {
-        console.log('liste des scores des JOUEURS',joueur);
         affichageScoresJoueur(joueur); // affichage des données joueurs (Avatar, pseudo, score)
     });
 
 // Ici on reçoit les données nécessaire à la suppression d'un joueur
     websocketConnection.on('removeJoueur', function(joueurDeconnect) {
-        console.log('joueurDeconnect',joueurDeconnect);   
         deconnectJoueur(joueurDeconnect);
     });
-});
-  
+}); 

@@ -341,13 +341,13 @@ let getGagnant = function(pObjetReponse) {
     
     mongodb.MongoClient.connect('mongodb://localhost:27017/jeu', function(error, client) { // mise à jour de la collection joueur: score
         if (! error) {                
-                let colJoueur = client.db('jeu').collection('joueur');
-                console.log("joueurs['joueur'+objetReponse.joueur].username",joueurs['joueur'+pObjetReponse.joueur].username)
-                colJoueur.update({username:gagnant}, {$set:{score:leScore, dernierTemps:tempsEcoule, rapidite:rapidite}});        
-                console.log('update ok');
-                colJoueur = client.db('jeu').collection('joueur');
-                colJoueur.find({username:gagnant}).toArray(function(error, documents) {
-                console.log('documents pares update',documents);
+            let colJoueur = client.db('jeu').collection('joueur');
+            console.log("joueurs['joueur'+objetReponse.joueur].username",joueurs['joueur'+pObjetReponse.joueur].username)
+            colJoueur.update({username:gagnant}, {$set:{score:leScore, dernierTemps:tempsEcoule, rapidite:rapidite}});        
+            console.log('update ok');
+            colJoueur = client.db('jeu').collection('joueur');
+            colJoueur.find({username:gagnant}).toArray(function(error, documents) {
+            console.log('documents pares update',documents);
                 if (error) {
                     console.log('Erreur de collection avant update',error);
                 }

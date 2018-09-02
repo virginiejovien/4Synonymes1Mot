@@ -61,6 +61,9 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
 
         La base de données jeu a été créée et a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
 
+        Rappel: Avant de lancer le serveur du jeu il est nécéssaire de se placer dur la BDD jeu, taper la commande suivante:
+        - use jeu
+
   - lancer le serveur: serveur-jeu.js
        - $ cd ~/4Synonymes1Mot"
        - $ nodemon serveur-jeu.js

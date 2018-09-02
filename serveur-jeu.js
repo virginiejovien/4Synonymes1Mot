@@ -44,7 +44,6 @@ verifDBConnect();
 //  Préparation du fond d'écran, et récupération des scores des joueurs 
 //  Requete des infos des scores des joueurs dans la collection "joueur" de la BDD JEU
 //*************************************************************************************************
-
 app.set('view engine', 'pug');
 app.use('/static', express.static(__dirname + '/assets'));
 app.get('/', function(req, res, next) {    
@@ -412,7 +411,7 @@ socketIo.on('connection', function(websocketConnection) {
                     });
                 }
             });
-
+            
         } else {
             let lettresReponse = objetQuestions.synonyme;  //on n'a pas de gagnant on envoie un indice pour aider les joueurs à trouver le mot
             socketIo.emit('lettre', lettresReponse);     // on envoie l'indice au front pour aider les joueurs à trouver le mot

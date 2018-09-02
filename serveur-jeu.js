@@ -30,7 +30,8 @@ const verifDBConnect = function() {
             console.log('La Base De Données JEU fonctionne');
         }
     });
-}
+};
+
 // ************************************************************************************************
 // Verification de l'accessibilité de la Base De Données :"JEU"- 
 // Dans un contexte professionnelle je m'assurai que la BDD fonctionne à chaque requete mais
@@ -44,26 +45,22 @@ verifDBConnect();
 //  Requete des infos des scores des joueurs dans la collection "joueur" de la BDD JEU
 //*************************************************************************************************
 
-    app.set('view engine', 'pug');
-    app.use('/static', express.static(__dirname + '/assets'));
-    app.get('/', function(req, res, next) {
-        
-        dbInterface.connectDB(req,res,next,function(db) {
-            
-          console.log('mongodb connected');
-          const collection = db.collection('joueur');
-          console.log('collection',collection);
-          collection.find().toArray(function(err, data){
-            if (err) {
-              console.log('Erreur de collection');
-              return;
-            }
-            console.log('data',data);  
-            res.render('index', {joueur: data})  
-          });
+app.set('view engine', 'pug');
+app.use('/static', express.static(__dirname + '/assets'));
+app.get('/', function(req, res, next) {    
+    dbInterface.connectDB(req,res,next,function(db) {            
+        console.log('mongodb connected');
+        const collection = db.collection('joueur');
+        collection.find().toArray(function(err, data){
+        if (err) {
+            console.log('Erreur de collection');
+            return;
+        }
+        console.log('data',data);  
+        res.render('index', {joueur: data})  
         });
     });
-
+});
 
 // ***********************************************************************************************
 //  Lancement du serveur NodeJS
@@ -76,7 +73,6 @@ const serverWeb = app.listen(8000, function() {
 //************************************************************************************************
 // Déclaration des variables globales
 //************************************************************************************************
-
 const joueurs = 
 {
     compteur:-1,
@@ -163,10 +159,8 @@ let client = {};                    // instance de la base de données
 // Controle du Nbre maxi de joueurs
 //************************************************************************************************
 let controleNbreMaxiPlayersIsOK = function(pWebsocketConnection,pObjetJoueur) {
-    console.log('joueurs.compteur au niveau controle maxi',joueurs.compteur)
     if ((joueurs.compteur >= 4) || (joueurs.max)){
         joueurs.max= true;
-        console.log('ATTENTION CONTROLE le nombre de joueurs maxi atteint');
         let message = {};
         message.id = connectes.id[connectes.compteur]
         pObjetJoueur.username = '';
@@ -182,9 +176,7 @@ let controleNbreMaxiPlayersIsOK = function(pWebsocketConnection,pObjetJoueur) {
 // Controle si un joueur a quitté la partie: on n'autorise plus de nouveaux joueurs même si le nombre de joueurs maxi n'est pas atteint
 //*************************************************************************************************************************************
 let controlePartiPlayersIsOK = function(pWebsocketConnection,pObjetJoueur) {
-    console.log('joueurs.parti partie en cours',joueurs.parti)
     if ((joueurs.parti)){
-        console.log("ATTENTION CONTROLE un joueur est parti on n'accepte plus de nouveaux joueurs");
         let message = {};
         message.id = connectes.id[connectes.compteur]
         pObjetJoueur.username = '';
@@ -204,9 +196,8 @@ let sendAlreadyExistentPseudoMsg = function(pWebsocketConnection, pObjetJoueur) 
     message.id = connectes.id[connectes.compteur];
     pObjetJoueur.username = '';
     message.message = 'Ce pseudo existe déjà';
-    console.log('message reçu pb saisie pseudo',message);
     pWebsocketConnection.emit('message', message);
-}
+};
 
 //************************************************************************************************
 // Vérification que le pseudo du joueur est renseigné
@@ -217,13 +208,12 @@ let checkFilledPlayerNameIsOk = function(pObjetJoueur, pWebsocketConnection) {
         // message.id = connectes.id[connectes.compteur];
         pObjetJoueur.username = '';
         message.message = 'Vous devez saisir un Pseudo';
-        console.log('message reçu pb saisie pseudo',message);
         pWebsocketConnection.emit('message', message);
         return false;
     } else {
         return true;
     }
-}
+};
 
 //************************************************************************************************
 // Préparation des données du nouveau joueur
@@ -235,16 +225,14 @@ let prepareAndInsertNewPlayer = function(pObjetJoueur,pColJoueur) {
     pObjetJoueur.dateFin = 0;
     pObjetJoueur.duree = 0;
     pObjetJoueur.dernierTemps = 0;  //dernier temps pour trouver la reponse
-    pObjetJoueur.rapidite = joueurs['joueur'+joueurs.compteur].rapidite; //meilleur temps pour trouver la réponse
-    console.log("pObjetJoueur.duree",pObjetJoueur.duree);                                                                
+    pObjetJoueur.rapidite = joueurs['joueur'+joueurs.compteur].rapidite; //meilleur temps pour trouver la réponse                                                            
     joueurs['joueur'+joueurs.compteur].username= pObjetJoueur.username;
     pObjetJoueur.avatar = joueurs['joueur'+joueurs.compteur].avatar; 
     pObjetJoueur.joueur = joueurs['joueur'+joueurs.compteur].joueur; 
-    pObjetJoueur.score = joueurs['joueur'+joueurs.compteur].score;
-    console.log("pObjetJoueur",pObjetJoueur);    
+    pObjetJoueur.score = joueurs['joueur'+joueurs.compteur].score;   
     pColJoueur.insert(pObjetJoueur);
     pObjetJoueur.ready = joueurs['joueur'+joueurs.compteur].ready;
-}
+};
 
 //************************************************************************************************
 // calcul de la durée du temps passé à jouer du joueur qui quitte le jeu
@@ -253,11 +241,7 @@ let prepareAndInsertNewPlayer = function(pObjetJoueur,pColJoueur) {
 let updateDureePlayer = function(pCurrentPlayer,pColJoueur) {
     let dateStop =  new Date().getTime();
     joueurs['joueur'+pCurrentPlayer].dateFin =  dateStop;
-    let elapsedTime = joueurs['joueur'+pCurrentPlayer].dateFin - joueurs['joueur'+pCurrentPlayer].dateDebut; 
-    console.log("joueurs['joueur'+pCurrentPlayer].dateDebut",joueurs['joueur'+pCurrentPlayer].dateDebut);
-    console.log("joueurs['joueur'+pCurrentPlayer].dateFin",joueurs['joueur'+pCurrentPlayer].dateFin);
-    console.log("elapsedTime   TTTTTTTT",elapsedTime);
-    console.log("joueurs['joueur'+pCurrentPlayer].username",joueurs['joueur'+pCurrentPlayer].username);
+    let elapsedTime = joueurs['joueur'+pCurrentPlayer].dateFin - joueurs['joueur'+pCurrentPlayer].dateDebut;
     pColJoueur.update({username:joueurs['joueur'+pCurrentPlayer].username}, {$set:{duree:elapsedTime, dateFin:dateStop}});        
 };                                                                   
 
@@ -268,43 +252,36 @@ let getSeriesOfQuestions = function(pSocketIo) {
     let colQuestion = client.db('jeu').collection('question');           
     colQuestion.aggregate([ { $sample: { size: 1 } } ]).toArray(function(error, documents){
         if (! error) {  
-            console.log(documents);
             documents.forEach(function(objetQuestion){
-                objetQuestions.synonyme = objetQuestion.synonyme;  
-                console.log('objetQuestions.synonyme',objetQuestions.synonyme);                 
+                objetQuestions.synonyme = objetQuestion.synonyme;                  
             });
             joueurs.dateDebut = new Date().getTime();   
             pSocketIo.emit('question', documents);
         } 
     });
-}
+};
 
 //************************************************************************************************
 // Obtention des scores des joueurs la BDD et transmission de celles-ci à tout le monde
 //************************************************************************************************
 let getScores = function(pSocketIo) {
-
     let colScores = client.db('jeu').collection('joueur');           
     colScores.find().sort({score:-1, rapidite:1}).toArray(function(err, data){
         if (err) {
           console.log('Erreur de collection');
           return;
         }
-        console.log('data',data);  
         pSocketIo.emit('scores',  data);             
     });   
-} 
+}; 
  
 //************************************************************************************************
 // JOUEUR PRET A JOUER 
 //************************************************************************************************
 let listenReady = function(pObjetJoueur, pWebsocketConnection) {
-    pWebsocketConnection.on('ready', function (pObjetJoueur) {
-        console.log('pObjetJoueur READY',pObjetJoueur);
-        console.log('pObjetJoueur.joueur READY',pObjetJoueur.joueur);           
+    pWebsocketConnection.on('ready', function (pObjetJoueur) {          
         joueurs['joueur'+pObjetJoueur.joueur].ready = true;
         pObjetJoueur.ready = joueurs['joueur'+pObjetJoueur.joueur].ready;
-        console.log("'joueur'+objetDuJoueur.joueur].ready",joueurs['joueur'+pObjetJoueur.joueur].ready);
         pWebsocketConnection.emit('peutJouer', pObjetJoueur.ready);    
     });
 };
@@ -322,7 +299,6 @@ let getGagnant = function(pObjetReponse) {
     gagnant = joueurs['joueur'+pObjetReponse.joueur].username;  // on récupère le pseudo du gagnant
     joueurs.dateFin =  new Date().getTime();          // on recupere la date pour calculer le temps écoulé 
     let t = joueurs.dateFin - joueurs.dateDebut;       // on calcule le temps mis pour trouvé la réponse
-    console.log("joueurs.dateDebut AAAAAAAAA",joueurs.dateDebut);
     tempsEcoule  = Math.floor(t / 1000) % 60; // temps passé à jouer en secondes 
       
     if ( joueurs['joueur'+pObjetReponse.joueur].rapidite === 0 ) { // si premier temps de rapidite on récupère le temps écoulé
@@ -342,12 +318,10 @@ let getGagnant = function(pObjetReponse) {
     mongodb.MongoClient.connect('mongodb://localhost:27017/jeu', function(error, client) { // mise à jour de la collection joueur: score
         if (! error) {                
             let colJoueur = client.db('jeu').collection('joueur');
-            console.log("joueurs['joueur'+objetReponse.joueur].username",joueurs['joueur'+pObjetReponse.joueur].username)
             colJoueur.update({username:gagnant}, {$set:{score:leScore, dernierTemps:tempsEcoule, rapidite:rapidite}});        
             console.log('update ok');
             colJoueur = client.db('jeu').collection('joueur');
             colJoueur.find({username:gagnant}).toArray(function(error, documents) {
-            console.log('documents pares update',documents);
                 if (error) {
                     console.log('Erreur de collection avant update',error);
                 }
@@ -359,25 +333,21 @@ let getGagnant = function(pObjetReponse) {
 /*****************************************************************************************************/
 /*************************  Partie Websocket du serveur  *********************************************/
 /*****************************************************************************************************/
-
 let socketIo = new SocketIo(serverWeb);
 
 socketIo.on('connection', function(websocketConnection) {
-    websocketConnection.emit('connexionServeurOK', {msg:'Connexion effectuée'});
-    console.log('websocketConnection.id',websocketConnection.id);     
+    websocketConnection.emit('connexionServeurOK', {msg:'Connexion effectuée'});   
     console.log('Connexion établie');
     let objetJoueur = {};
     let currentPlayer = -1;
     websocketConnection.on('controle', function (data) {       // Reception de la saisie du Login dans le formulaire
         objetJoueur = data;
-        console.log('data reçues : ',data,' --- ',objetJoueur);
-    
+            
         if (controleNbreMaxiPlayersIsOK(websocketConnection,objetJoueur)) { // controle si le nbre de joueur maxi n'est pas atteint
             if (controlePartiPlayersIsOK(websocketConnection,objetJoueur)) {  // controle joueur parti donc parti déjà bien entammé donc partie encours   
                 if (checkFilledPlayerNameIsOk(objetJoueur,websocketConnection)) {  // Si le nom du joueur est non vide --> Ok
                     // Vérification de l'unicité du nom du joueur dans la partie dans la collection joueur de la BDD JEU
                     let colJoueur = client.db('jeu').collection('joueur');
-                    console.log('objetJoueur.username',objetJoueur.username);
                     colJoueur.find({username:objetJoueur.username}).toArray(function(error, documents) {                    
                         if (error) {
                             console.log('Erreur de collection',error);
@@ -385,7 +355,6 @@ socketIo.on('connection', function(websocketConnection) {
                         } else {                                   
                             
                             } if (documents == false) {
-                                console.log('documents false',documents);
                                 // if (documents == false) {                          // Nouveau joueur, inexistant dans la base --> Ok, On l accepte
                                 joueurs.compteur++;                                   // Nbre de joueurs actuels autorisés et dernier joueur connecté  (Water Mark)
                                 currentPlayer = joueurs.compteur;                     // Joueur courant de cette session-Connexion
@@ -406,7 +375,7 @@ socketIo.on('connection', function(websocketConnection) {
                                    
                                 }                          
                             } else {
-                                console.log('documents pseudo existe déjà',documents);
+                
                                 sendAlreadyExistentPseudoMsg(websocketConnection, objetJoueur)
                         }
                     });                          
@@ -426,19 +395,15 @@ socketIo.on('connection', function(websocketConnection) {
           
         if (objetReponse.reponse === objetQuestions.synonyme) {   // est ce que c'est la bonne réponse?
             getGagnant(objetReponse);  // si oui mise a jour du gagant dans BBD  
-     
             socketIo.emit('gagne', joueurs['joueur'+objetReponse.joueur]); // on envoie au front le joueur qui a gagné
-            getScores(socketIo); // MAJ du tableau des scores des joueurs on envoie au front le tableau des scores MAJ
+            getScores(socketIo);    // MAJ du tableau des scores des joueurs on envoie au front le tableau des scores MAJ
             mongodb.MongoClient.connect('mongodb://localhost:27017/jeu', function(error, client) { // obtention de la nouvelle série de questions
                  if (! error) {                
                     let colQuestion = client.db('jeu').collection('question');           
                     colQuestion.aggregate([ { $sample: { size: 1 } } ]).toArray(function(error, documents) {
                          if (! error) {  
-                            console.log(documents);
-                       //     let objetQuestion = documents;
                             documents.forEach(function(objetQuestion) { 
-                            objetQuestions.synonyme = objetQuestion.synonyme;  
-                            console.log('objetQuestions.synonyme',objetQuestions.synonyme);                 
+                                objetQuestions.synonyme = objetQuestion.synonyme;     // on récupére les questions et le synonyme à trouver               
                             });  
                             joueurs.dateDebut = new Date().getTime(); // on réinialise la date pour calculer le temps de réponse pour trouver la question   
                             getScores(socketIo); // MAJ du tableau des scores des joueurs on envoie au front le tableau des scores MAJ    
@@ -449,10 +414,8 @@ socketIo.on('connection', function(websocketConnection) {
             });
 
         } else {
-           console.log('objetQuestions.synonyme',objetQuestions.synonyme); //on n'a pas de gagnant on envoie un indice pour aider les joueurs à trouver le mot
-           let lettresReponse = objetQuestions.synonyme;
-           console.log('lettresReponse',lettresReponse);
-           socketIo.emit('lettre', lettresReponse);
+            let lettresReponse = objetQuestions.synonyme;  //on n'a pas de gagnant on envoie un indice pour aider les joueurs à trouver le mot
+            socketIo.emit('lettre', lettresReponse);     // on envoie l'indice au front pour aider les joueurs à trouver le mot
         }   
     }); 
 
@@ -460,7 +423,6 @@ socketIo.on('connection', function(websocketConnection) {
 // Gestion de la deconnection des joueurs
 //***********************************************************************************/
     websocketConnection.on('disconnect', function() {
-        console.log("currentPlayer",currentPlayer);        
         if(currentPlayer >= 0){     // Joueur courant de cette session-Connexion
             let colJoueur = client.db('jeu').collection('joueur');
             updateDureePlayer(currentPlayer,colJoueur);    // renseignement dans la BDD de la durée de temps passé à jouer du joueur qui se déconnecte 
@@ -469,7 +431,6 @@ socketIo.on('connection', function(websocketConnection) {
             joueurs['joueur'+currentPlayer].username = '';
             joueurs['joueur'+currentPlayer].ready = false;   
             joueurs.compteur = joueurs.compteur -1; 
-            console.log("joueurs.compteur",joueurs.compteur);
             joueurs.parti= true; // un joueur a quitté la partie on n'autorisera plus de nouveaux joueurs 
             if (joueurs.compteur == -1) { //il n'y a plus de joueurs connectés qui jouent on autorise une nouvelle partie avec des nouveaux joueurs
                 joueurs.parti =false;
@@ -481,7 +442,3 @@ socketIo.on('connection', function(websocketConnection) {
     });
 
 });   //  Fin de la partie "Connexion" 
-
-
-
-

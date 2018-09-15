@@ -49,7 +49,6 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
 
 2) Procédure de lancement du jeu 
   - lancer la BBD:
-<<<<<<< HEAD
         1: lancer mongodb en executant: lancer-jeu-mongo.bat (à placer sur le bureau et à exécuter)
         2: puis se placer sur la base de données jeu : use jeu
         3: mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
@@ -57,22 +56,6 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
         Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
 
         La base de données jeu a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
-=======
-        1: Lancer mongodb en executant: lancer-mongo.bat (adaptez les chemins qui correspondent à votre         configuration et placer le fichier sur le bureau et exécuter le)
-        2: Créer la DataBase jeu : 
-            use jeu
-        3: Importer le fichier question.json  etc reation de la collection  "question"
-            mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
-        3': Ou autre possibilité: on crée la collection question 
-            db.createCollection("question");
-            copier le contenu du fichier : bdd_jeu_questions.js qui se trouve  dans le repertoire data :  ~/4Synonymes1Mot/data/bdd_jeu_questions.js (tous les insert de la collection question)
-            Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
-
-        La base de données jeu a été créée et a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
-
-        Rappel: Avant de lancer le serveur du jeu il est nécéssaire de se placer dur la BDD jeu, taper la commande suivante:
-        - use jeu
->>>>>>> f8d28ed28e16e5db40a9307d0ebe400e75271036
 
         Rappel: Avant de lancer le serveur du jeu il est nécéssaire de se placer dur la BDD jeu, taper la commande suivante:
            - use jeu

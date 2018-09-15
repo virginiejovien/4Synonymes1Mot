@@ -9,11 +9,21 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "mongodb": "^3.1.4",
     "nodejs": "0.0.0",
     "pug": "^2.0.3",
     "socket.io": "^2.1.1",
     "websocket": "^1.0.26"
   },
   "devDependencies": {},
-  "description": ""
+  "description": "Auteur du projet: \r - Virginie Jovien\r Projet: Jeu multi-joueurs : 4 Synonymes pour 1 Mot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/virginiejovien/4Synonymes1Mot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/virginiejovien/4Synonymes1Mot/issues"
+  },
+  "homepage": "https://github.com/virginiejovien/4Synonymes1Mot#readme"
 }

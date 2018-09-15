@@ -45,13 +45,16 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
 
 2) Procédure de lancement du jeu
   - lancer la BBD:
-        1: lancer mongodb en executant: lancer-mongo.bat (à placer sur le bureau et à exécuter)
+        1: lancer mongodb en executant: lancer-jeu-mongo.bat (à placer sur le bureau et à exécuter)
         2: puis se placer sur la base de données jeu : use jeu
         3: mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
         (3' si pb dans l'importation du fichier JSON) copier le contenu du fichier : bdd_jeu_questions.js qui se trouve  dans le repertoire data :  ~/4Synonymes1Mot/data/bdd_jeu_questions.js (tous les insert de la collection question)
         Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
 
         La base de données jeu a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
+
+        Rappel: Avant de lancer le serveur du jeu il est nécéssaire de se placer dur la BDD jeu, taper la commande suivante:
+           - use jeu
 
   - lancer le serveur: serveur-jeu.js
        - $ cd ~/4Synonymes1Mot"

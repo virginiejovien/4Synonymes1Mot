@@ -65,7 +65,7 @@ app.get('/', function(req, res, next) {
 // ***********************************************************************************************
 //  Lancement du serveur NodeJS
 // ***********************************************************************************************
-const serverWeb = app.listen(process.env.PORT || 8000, function() {
+const serverWeb = app.listen(process.env.PORT, function() {
     const portEcoute = serverWeb.address().port
     console.log('Écoute du serveur NodeJs sur le port %s',portEcoute);
 });

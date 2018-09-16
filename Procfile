@@ -1,1 +1,1 @@
-web: node serveur-jeu.js
+web: node 4Synonymes1Mot.js

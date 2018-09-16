@@ -21,7 +21,7 @@ const SocketIo = require('socket.io');
 // est accessible, sinon, on envoie un message d'erreur à l'administrateur systhème et on termine le programme
 //************************************************************************************************************ 
 const verifDBConnect = function() {
-    mongodb.MongoClient.connect("mongodb://localhost:27017/jeu", function(err, db) {
+    mongodb.MongoClient.connect('mongodb://virgo:jeu2018@ds257851.mlab.com:57851/jeu', function(err, db) {
         if (err) {
             console.log('La Base De Données est inaccessible, le jeu ne peut pas démarrer');
         throw "La Base De Données est inaccessible, le jeu ne peut pas démarrer, veuillez contacter l\'Administrateur Système";
@@ -65,7 +65,7 @@ app.get('/', function(req, res, next) {
 // ***********************************************************************************************
 //  Lancement du serveur NodeJS
 // ***********************************************************************************************
-const serverWeb = app.listen(8000, function() {
+const serverWeb = app.listen(process.env.PORT || 8000, function() {
     const portEcoute = serverWeb.address().port
     console.log('Écoute du serveur NodeJs sur le port %s',portEcoute);
 });
@@ -315,7 +315,7 @@ let getGagnant = function(pObjetReponse) {
 
     joueurs['joueur'+pObjetReponse.joueur].dernierTemps = tempsEcoule; // maj du meilleur  temps  dans l'objet du joueur
     
-    mongodb.MongoClient.connect('mongodb://localhost:27017/jeu', function(error, client) { // mise à jour de la collection joueur: score
+    mongodb.MongoClient.connect('mongodb://virgo:jeu2018@ds257851.mlab.com:57851/jeu', function(error, client) { // mise à jour de la collection joueur: score
         if (! error) {                
             let colJoueur = client.db('jeu').collection('joueur');
             colJoueur.update({username:gagnant}, {$set:{score:leScore, dernierTemps:tempsEcoule, rapidite:rapidite}});        
@@ -393,7 +393,7 @@ socketIo.on('connection', function(websocketConnection) {
             getGagnant(objetReponse);  // si oui mise a jour du gagant dans BBD  
             socketIo.emit('gagne', joueurs['joueur'+objetReponse.joueur]); // on envoie au front le joueur qui a gagné
             getScores(socketIo);    // MAJ du tableau des scores des joueurs on envoie au front le tableau des scores MAJ
-            mongodb.MongoClient.connect('mongodb://localhost:27017/jeu', function(error, client) { // obtention de la nouvelle série de questions
+            mongodb.MongoClient.connect('mongodb://virgo:jeu2018@ds257851.mlab.com:57851/jeu', function(error, client) { // obtention de la nouvelle série de questions
                  if (! error) {                
                     let colQuestion = client.db('jeu').collection('question');           
                     colQuestion.aggregate([ { $sample: { size: 1 } } ]).toArray(function(error, documents) {

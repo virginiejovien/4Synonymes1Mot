@@ -43,6 +43,7 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
    |-- lancer-mongo.bat
    |-- package-lock.json
    |-- package.json 
+   |-- Procfile
    |-- README.md
    |-- 4Synonymes1Mot.js // serveur  du jeu 
    
@@ -50,13 +51,15 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
 2) Procédure de lancement du jeu 
       La base de données jeu est hébergé sur le site mLab
 
-  - lancer le serveur: serveur-jeu.js
+  - lancer le serveur: 4Synonymes1Mot.js
        - $ cd ~/4Synonymes1Mot"
-       - $ nodemon serveur-jeu.js
+       - $ nodemon 4Synonymes1Mot.js
 
   - coté navigateur (Chrome, Firefox, Opera....)
  
-        taper l'addresse suivante:  http://localhost:8000/
+        taper l'addresse suivante: 
+        https://quatre-synonymes-un-mot.herokuapp.com
+        ou http://localhost:8000/
 
   A vous de JOUER!!!!!      
        

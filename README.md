@@ -45,15 +45,15 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
    |-- package.json 
    |-- Procfile
    |-- README.md
-   |-- 4Synonymes1Mot.js // serveur  du jeu 
+   |-- quatreSynonymesUnMot.js // serveur  du jeu 
    
 
 2) Procédure de lancement du jeu 
       La base de données jeu est hébergé sur le site mLab
 
-  - lancer le serveur: 4Synonymes1Mot.js
+  - lancer le serveur: quatreSynonymesUnMot.js
        - $ cd ~/4Synonymes1Mot"
-       - $ nodemon 4Synonymes1Mot.js
+       - $ nodemon quatreSynonymesUnMot.js
 
   - coté navigateur (Chrome, Firefox, Opera....)
  

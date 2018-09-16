@@ -1,1 +1,1 @@
-web: node 4Synonymes1Mot.js
+web: node quatreSynonymesUnMot.js

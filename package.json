@@ -1,11 +1,11 @@
 {
-  "name": "o",
+  "name": "quatresynonymesunmot",
   "version": "1.0.0",
   "main": "quatreSynonymesUnMot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Virginie Jovien",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",

@@ -59,7 +59,7 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
  
         taper l'addresse suivante: 
         https://quatre-synonymes-un-mot.herokuapp.com
-        ou http://localhost:8000/
+        ou http://localhost:2000/
 
   A vous de JOUER!!!!!      
        

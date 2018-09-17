@@ -65,8 +65,8 @@ app.get('/', function(req, res, next) {
 // ***********************************************************************************************
 //  Lancement du serveur NodeJS
 // ***********************************************************************************************
-const serverWeb = app.listen(process.env.PORT || 8000, function() {
-    const portEcoute = serverWeb.address().port
+const server= app.listen(process.env.PORT || 8000, function() {
+    const portEcoute = server.address().port
     console.log('Écoute du serveur NodeJs sur le port %s',portEcoute);
 });
 
@@ -333,7 +333,7 @@ let getGagnant = function(pObjetReponse) {
 /*****************************************************************************************************/
 /*************************  Partie Websocket du serveur  *********************************************/
 /*****************************************************************************************************/
-let socketIo = new SocketIo(serverWeb);
+let socketIo = new SocketIo(server);
 
 socketIo.on('connection', function(websocketConnection) {
     websocketConnection.emit('connexionServeurOK', {msg:'Connexion effectuée'});   

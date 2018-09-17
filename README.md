@@ -6,7 +6,7 @@ Le jeu est accessible à l'adresse suivante:
 
         https://quatre-synonymes-un-mot.herokuapp.com
        
-1) Procédure d'installation pour récupérer le projet
+1) Procédure d'installation pour récupérer le projet et le lancer à partir de localhost
 
 Pour récupérer un clone du projet "4Synonymes1Mot":
 $ git clone https:/github.com/virginiejovien/4Synonymes1Mot
@@ -53,7 +53,19 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
    
 
 2) Procédure de lancement du jeu en localhost
-      La base de données jeu est hébergé sur le site mLab
+    - La base de données jeu est hébergée sur le site mLab
+    - Possibilité de la créer en local à partir des fichiers question.json et joueur.json
+      - lancer la BBD:
+          1: lancer mongodb 
+          2: puis se placer sur la base de données jeu : use jeu
+          3: mongoimport --db jeu --collection question --file ~/4Synonymes1Mot/data/question.json
+          (3' si pb dans l'importation du fichier JSON) copier le contenu du fichier : bdd_jeu_questions.js qui se trouve  dans le repertoire data :  ~/4Synonymes1Mot/data/bdd_jeu_questions.js (tous les insert de la collection question)
+          Dans la BDD jeu dans les lignes de commandes de mongodb apres use jeu :::> coller le db.question.insertMany([{.....}]);
+
+          La base de données jeu a actuellemnt une collection "question", à la premiere exexution du jeu "4Synonymes1Mot", lorsqu'un premier joueur s'inscrira correctement une deuxième collection "joueur" sera créée. 
+
+          Rappel: Avant de lancer le serveur du jeu il est nécéssaire de se placer dur la BDD jeu, taper la commande suivante:
+            - use jeu
 
   - lancer le serveur: quatreSynonymesUnMot.js
        - $ cd ~/4Synonymes1Mot"

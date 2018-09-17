@@ -14,8 +14,8 @@ window.addEventListener('DOMContentLoaded', function() {
     var blockPseudo = window.document.getElementById('connect');
     var blockBravo = window.document.getElementById('bravo');
     var blockJoueur = window.document.getElementById('tableau-joueur');
-    var joueur0 = window.document.getElementById('joueur0');
-    var joueur1 = window.document.getElementById('joueur1');
+    var joueur0 = window.document.getElementById('joueur0');   
+    var joueur1 = window.document.getElementById('joueur1'); 
     var joueur2 = window.document.getElementById('joueur2');
     var joueur3 = window.document.getElementById('joueur3');
     var joueur4 = window.document.getElementById('joueur4');

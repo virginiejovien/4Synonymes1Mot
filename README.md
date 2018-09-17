@@ -2,7 +2,11 @@ Auteur du projet:
 - Virginie Jovien
 Projet Back-End : Jeu multi-joueurs : 4 Synonymes pour 1 Mot 
 
-1) Procédure d'installation avant le lancement du jeu
+Le jeu est accessible à l'adresse suivante:
+
+        https://quatre-synonymes-un-mot.herokuapp.com
+       
+1) Procédure d'installation pour récupérer le projet
 
 Pour récupérer un clone du projet "4Synonymes1Mot":
 $ git clone https:/github.com/virginiejovien/4Synonymes1Mot
@@ -48,7 +52,7 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
    |-- quatreSynonymesUnMot.js // serveur  du jeu 
    
 
-2) Procédure de lancement du jeu 
+2) Procédure de lancement du jeu en localhost
       La base de données jeu est hébergé sur le site mLab
 
   - lancer le serveur: quatreSynonymesUnMot.js
@@ -56,10 +60,11 @@ En dessous du répertoire ": ~/4Synonymes1Mot"   on devrait avoir l'arborescence
        - $ nodemon quatreSynonymesUnMot.js
 
   - coté navigateur (Chrome, Firefox, Opera....)
- 
-        taper l'addresse suivante: 
-        https://quatre-synonymes-un-mot.herokuapp.com
-        ou http://localhost:2000/
+    taper l'addresse suivante: 
+   http://localhost:2000/
+
+
+      
 
   A vous de JOUER!!!!!      
        

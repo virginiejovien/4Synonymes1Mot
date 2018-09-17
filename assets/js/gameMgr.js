@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', function() {
 //************************************************************************************************
 // Déclaration des variables globales
 //************************************************************************************************   
-    var websocketConnection = io('http://localhost:8000');
+    var websocketConnection = io('https://quatre-synonymes-un-mot.herokuapp.com/');
     var formPseudo = window.document.getElementById('form-pseudo');
     var blockPseudo = window.document.getElementById('connect');
     var blockBravo = window.document.getElementById('bravo');
@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', function() {
     };
 
 //************************************************************************************************
-// Verification que la connexion est établie avec le serveur sur le port:8000
+// Verification que la connexion est établie avec le serveur sur le port:2000
 //************************************************************************************************
     websocketConnection.on('connexionServeurOK', function(msg) {
         console.log('msg',msg);
